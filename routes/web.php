@@ -34,4 +34,5 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('dashboard/create-post', [PostController::class, 'index'])->name('create.post');
+Route::get('dashboard/create-post', [PostController::class, 'indexPost'])->name('create.post');
+Route::post('dashboard/create-post', [PostController::class, 'store'])->name('create.posting');

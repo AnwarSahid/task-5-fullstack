@@ -15,6 +15,10 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script src="https://<hostname.tld>/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script src="https://cdn.tiny.cloud/1/oo5h3rhqt3mw11yo0urrz6djkcb9woj930v7bjifz91fx0il/tinymce/6/plugins.min.js"
+        referrerpolicy="origin"></script>
 </head>
 
 <body class="bg-gray-200 h-screen antialiased leading-none font-sans">

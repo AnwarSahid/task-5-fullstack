@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,7 +12,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexPost()
     {
         return view('post.create-post');
     }
@@ -34,7 +35,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $request->validate([
+            'title' => 'required|max:255',
+            'image' => 'required',
+            'content' => 'required',
+            'catagory_id' => 'required',
+        ]);
+        $attr['user_id'] = auth()->user()->id;
+        $attr['image'] = $request->file('image')->store('image', 'public');
+        Articles::create($attr);
+        return back()->with('massage', 'posting was created');
     }
 
     /**
