@@ -18,23 +18,23 @@
                 </div>
 
                 <div class="col-span-2 h-full bg-white rounded-sm p-5 flex flex-wrap items-center justify-center">
-                    @for ($x = 0; $x <= 10; $x++)
+                    @foreach ($articles as $item)
                         <div class="max-w-2xl mr-4 mt-5 ">
                             <div
                                 class="bg-white shadow-md border border-gray-200 rounded-lg max-w-xs dark:bg-gray-800 dark:border-gray-700">
                                 <a href="#">
-                                    <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
-                                        alt="">
+                                    <img class=" object-cover h-48 w-96 rounded-t-lg"
+                                        src="{{ asset('/storage/' . $item->image) }}" alt="">
                                 </a>
                                 <div class="p-5">
                                     <a href="#">
-                                        <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
-                                            Noteworthy technology acquisitions 2021</h5>
+                                        <h5
+                                            class="text-gray-900 font-bold text-sm truncate tracking-tight mb-2 dark:text-white">
+                                            {{ $item->title }}</h5>
                                     </a>
-                                    <p class="font-normal text-gray-700 mb-3 dark:text-gray-400">Here are the biggest
-                                        enterprise
-                                        technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                                    <a href="#"
+                                    <p class="font-normal text-gray-700 truncate mb-3 dark:text-gray-400">
+                                        {{ $item->content }}</p>
+                                    <a href="{{ route('detail.article', ['article' => $item->id]) }}"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Read more
                                         <svg class="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
 
 

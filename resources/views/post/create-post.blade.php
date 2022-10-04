@@ -5,11 +5,9 @@
         </div>
     @endif
 
-
-    <form action="{{ route('create.posting') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('create.new.post') }}" enctype="multipart/form-data" method="POST">
         @csrf
-
-        <div class="mb-4">
+        <div class="mb-4 ">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                 Title
             </label>
@@ -29,10 +27,10 @@
                 class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
         border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label=".form-select-lg example" name="category_id">
-                <option selected>Category</option>
-                <option value="1">Programming</option>
-                <option value="2">DevOps</option>
-                <option value="3">Ios</option>
+                @foreach ($categories as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+
             </select>
             @error('category_id')
                 <span class="text-red-500">{{ $message }}</span>
@@ -45,22 +43,20 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                 Content
             </label>
-            <textarea class="tinymce-editor" name="body"></textarea>
+            <textarea class="tinymce-editor" name="content"></textarea>
+
+            @error('content')
+                <span class="text-red-500">{{ $message }}</span>
+            @enderror
         </div>
 
-        <div class=" mt-5">
-            <div class="flex bg-gray-100 font-sans">
-
-
-
-
-
-                <div class="fileUploadWrap">
-
-                    <main class="flex  items-center justify-center bg-gray-100 font-sans">
-                        <label for="dropzone-file"
-                            class="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none"
+        <div class=" mt-5 w-full">
+            <div class=" w-full font-sans">
+                <div class="fileUploadWrap w-full">
+                    <main class=" w-full items-center justify-center bg-gray-100 font-sans">
+                        <label for="image"
+                            class="cursor-pointer flex w-full  flex-col items-center rounded-xl border-2 border-dashed border-gray-400 bg-white p-6 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -68,20 +64,14 @@
 
                             <h2 class="mt-4 text-xl font-medium text-gray-700 tracking-wide">Payment File</h2>
 
-                            <p class="fileName ">Upload or darg & drop your file SVG,
-                                PNG, JPG or
-                                GIF. </p>
+                            <p class="fileName ">Click to upload Image Cover</p>
 
-                            <input id="dropzone-file" type="file" name="fileToUpload" class="hidden">
+                            <input id="image" type="file" name="image" class="hidden">
                     </main>
 
 
                 </div>
-
-
-
-
-                @error('file')
+                @error('image')
                     <span class="text-red-500">{{ $message }}</span>
                 @enderror
             </div>
@@ -103,6 +93,7 @@
             selector: 'textarea.tinymce-editor',
             height: 300,
             menubar: false,
+            forced_root_block: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +15,13 @@ class PostController extends Controller
      */
     public function indexPost()
     {
-        return view('post.create-post');
+        $categories = Categories::where('user_id', auth()->user()->id)->limit(50)->latest()->get();
+        return view('post.create-post', compact('categories'));
+    }
+    public function indexCategory()
+    {
+        $categories = Categories::where('user_id', auth()->user()->id)->limit(50)->latest()->get();
+        return view('post.create-category', compact('categories'));
     }
 
     /**
@@ -33,18 +40,33 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePost(Request $request)
     {
+
         $attr = $request->validate([
             'title' => 'required|max:255',
-            'image' => 'required',
+            'image' => 'required|mimes:jpg,png,jfif|max:2048',
             'content' => 'required',
-            'catagory_id' => 'required',
+            'category_id' => 'required'
         ]);
+
+
         $attr['user_id'] = auth()->user()->id;
         $attr['image'] = $request->file('image')->store('image', 'public');
+
+
         Articles::create($attr);
-        return back()->with('massage', 'posting was created');
+        return back()->with('message', 'posting was created');
+    }
+    public function storeCategory(Request $request)
+    {
+
+        $attr = $request->validate([
+            'name' => 'required|max:30',
+        ]);
+        $attr['user_id'] = auth()->user()->id;
+        Categories::create($attr);
+        return back()->with('message', 'posting was created');
     }
 
     /**

@@ -17,7 +17,7 @@
                     <x-side-bar />
                 </div>
 
-                <div class="col-span-2 h-full bg-white rounded-sm p-5 flex flex-wrap ">
+                <div class="col-span-2 h-full bg-white rounded-sm p-5  ">
                     {{ $slot }}
 
                 </div>

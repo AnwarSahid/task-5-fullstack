@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('post.home');
+
+        $articles = Articles::where('user_id', auth()->user()->id)->limit(30)->latest()->get();
+        return view('post.home', compact('articles'));
+    }
+
+    public function detailArticle(Articles $article)
+    {
+        return view('post.detail-article', compact('article'));
     }
 }
