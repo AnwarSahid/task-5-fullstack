@@ -1,85 +1,165 @@
-<x-navside>
-    @if (session()->has('message'))
-        <div class="alert bg-green-500 text-white show flex items-center mb-2" role="alert">
-            {{ session()->get('message') }}
-        </div>
-    @endif
+@extends('layouts.app')
 
-    <form action="{{ route('create.new.post') }}" enctype="multipart/form-data" method="POST">
-        @csrf
-        <div class="mb-4 ">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                Title
-            </label>
-            <input
-                class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
-                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="title" name="title" type="text" placeholder="title">
-            @error('title')
-                <span class="text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-        <div class=" mt-5">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                Category
-            </label>
-            <select
-                class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
-        border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                aria-label=".form-select-lg example" name="category_id">
-                @foreach ($categories as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                @endforeach
+@section('content')
+    <nav class=" sm:mx-auto sm:mt-10">
+        <div class="w-full sm:px-6">
+            <div class=" grid grid-cols-6 ">
+                <div class="w-auto ">
+                    <div class="bg-white rounded-lg shadow-xs">
 
-            </select>
-            @error('category_id')
-                <span class="text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-
-
-
-        <div class="form-group">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                Content
-            </label>
-            <textarea class="tinymce-editor" name="content"></textarea>
-
-            @error('content')
-                <span class="text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class=" mt-5 w-full">
-            <div class=" w-full font-sans">
-                <div class="fileUploadWrap w-full">
-                    <main class=" w-full items-center justify-center bg-gray-100 font-sans">
-                        <label for="image"
-                            class="cursor-pointer flex w-full  flex-col items-center rounded-xl border-2 border-dashed border-gray-400 bg-white p-6 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-
-                            <h2 class="mt-4 text-xl font-medium text-gray-700 tracking-wide">Payment File</h2>
-
-                            <p class="fileName ">Click to upload Image Cover</p>
-
-                            <input id="image" type="file" name="image" class="hidden">
-                    </main>
-
+                        <div class=" rounded-lg w-full mb-4 flex justify-center items-center">
+                            <img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/06/23/900003581.jpg"
+                                alt="" class="object-cover mt-5 w-20 h-20 rounded-full">
+                        </div>
+                        <div class="mx-5">
+                            <p class="font-semibold text-xs md:text-xl text-center  text-blue-900">
+                                {{ Auth::user()->name }}</p>
+                            <p class="text-base text-gray-500 text-center ">{{ Auth::user()->email }}</p>
+                        </div>
+                        <x-side-bar />
+                    </div>
 
                 </div>
-                @error('image')
-                    <span class="text-red-500">{{ $message }}</span>
-                @enderror
+                <div class="col-span-2 mx-2  ">
+                    <div class="bg-white rounded-lg p-5">
+                        <p class="mb-5 font-semibold font-sans text-xl text-gray-800">
+                            Create New Category</p>
+
+                        <form action="{{ route('create.new.category') }}" method="POST">
+                            @csrf
+                            <div class="mb-4">
+                                {{-- <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                    Category
+                                </label> --}}
+                                <div class="flex">
+                                    <input
+                                        class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
+                                border border-solid border-gray-300 rounded-xl  transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        id="name" name="name" type="text" placeholder="Category">
+                                    <button
+                                        class="ml-2 border-2  p-2 text-gray-500  hover:text-white hover:bg-blue-500 rounded-lg flex items-center justify-center focus:outline-none">
+                                        <svg class="h-6 w-6  hover:text-white" viewBox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" />
+                                            <circle cx="12" cy="12" r="9" />
+                                            <line x1="9" y1="12" x2="15" y2="12" />
+                                            <line x1="12" y1="9" x2="12" y2="15" />
+                                        </svg>
+
+                                        <span class=" text-sm font-normal items-center justify-center ">Create </span>
+                                    </button>
+                                </div>
+                                @error('name')
+                                    <span class="text-red-500 font-normal text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </form>
+
+
+                        <div class=" flex flex-wrap">
+
+                            @foreach ($categories as $item)
+                                <div class=" rounded-full px-3 py-2 text-sm font-hairline text-white m-3 bg-blue-700">
+                                    {{-- style="background-color: #{{ rand(100, 150) }}"> --}}
+                                    <span class="bg-white w-2 h-2 mr-2 inline-block rounded-full">
+                                    </span>
+                                    {{ $item->name }}
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-span-3 h-full bg-white rounded-lg p-5  ">
+                    <form action="{{ route('create.new.post') }}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <div class="mb-4 ">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                Title
+                            </label>
+                            <input
+                                class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
+                                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="title" name="title" type="text" placeholder="title">
+                            @error('title')
+                                <span class="text-red-500 font-normal text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class=" mt-5">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                Category
+                            </label>
+                            <select
+                                class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
+                        border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                aria-label=".form-select-lg example" name="category_id">
+                                @foreach ($categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+
+                            </select>
+                            @error('category_id')
+                                <span class="text-red-500 font-normal text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                Content
+                            </label>
+                            <textarea class="tinymce-editor" name="content"></textarea>
+
+                            @error('content')
+                                <span class="text-red-500 font-normal text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class=" mt-5 w-full">
+                            <div class=" w-full font-sans">
+                                <div class="fileUploadWrap hover:text-blue-600 text-gray-900 w-full">
+                                    <main class=" w-full items-center justify-center bg-gray-100 font-sans">
+                                        <label for="image"
+                                            class="cursor-pointer flex w-full  flex-col items-center rounded-xl border-2 border-dashed border-gray-400 hover:border-blue-600 bg-white p-6 text-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 " fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                            </svg>
+
+                                            <h2 class="mt-4 text-xl font-medium  tracking-wide">Payment File
+                                            </h2>
+
+                                            <p class="fileName ">Click to upload Image Cover</p>
+
+                                            <input id="image" type="file" name="image" class="hidden">
+                                    </main>
+
+
+                                </div>
+                                @error('image')
+                                    <span class="text-red-500  font-normal text-sm ">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+                            <button type="submit"
+                                class="bg-blue-500 mt-5 hover:bg-blue-700 text-white font-normal py-1 px-5 text-ms rounded-full focus:outline-none focus:shadow-outline flex flex-wrap items-center"><svg
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                </svg>
+                                Post</button>
+                    </form>
+                </div>
+
             </div>
+        </div>
+    </nav>
 
-
-            <button type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">post</button>
-    </form>
 
 
 
@@ -94,6 +174,7 @@
             height: 300,
             menubar: false,
             forced_root_block: false,
+            deprecation_warnings: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',
@@ -118,6 +199,4 @@
             }
         });
     </script>
-
-
-</x-navside>
+@endsection

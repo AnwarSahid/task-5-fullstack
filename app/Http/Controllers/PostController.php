@@ -18,6 +18,12 @@ class PostController extends Controller
         $categories = Categories::where('user_id', auth()->user()->id)->limit(50)->latest()->get();
         return view('post.create-post', compact('categories'));
     }
+    public function index()
+    {
+        $articles = Articles::paginate(10);
+        return view('post.articles', compact('articles'));
+    }
+
     public function indexCategory()
     {
         $categories = Categories::where('user_id', auth()->user()->id)->limit(50)->latest()->get();

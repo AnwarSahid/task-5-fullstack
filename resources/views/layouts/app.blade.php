@@ -8,17 +8,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'MY Post') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script src="https://<hostname.tld>/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <script src="https://cdn.tiny.cloud/1/oo5h3rhqt3mw11yo0urrz6djkcb9woj930v7bjifz91fx0il/tinymce/6/plugins.min.js"
-        referrerpolicy="origin"></script>
 </head>
 
 <body class="bg-gray-200 h-screen antialiased leading-none font-sans">
@@ -29,12 +26,20 @@
                     <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-900 no-underline">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    <a href="{{ route('home') }}" class="ml-4 text-sm font-normal text-gray-900 no-underline">
+                        Article
+                    </a>
+                    <a href="{{ route('create.new.post') }}"
+                        class="text-sm ml-4 font-normal text-gray-900 no-underline">
+                        Create Posting
+                    </a>
                 </div>
                 <nav class="space-x-4 text-gray-900 text-sm sm:text-base">
                     @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
                         @if (Route::has('register'))
-                            <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="no-underline hover:underline"
+                                href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
                         <span>{{ Auth::user()->name }}</span>
@@ -51,6 +56,7 @@
         </header>
 
         @yield('content')
+
     </div>
 </body>
 

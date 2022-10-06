@@ -31,6 +31,6 @@ class HomeController extends Controller
 
     public function detailArticle(Articles $article)
     {
-        return view('post.detail-article', compact('article'));
+        return view('post.detail-post', compact('article'));
     }
 }

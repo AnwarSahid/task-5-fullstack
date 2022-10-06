@@ -38,3 +38,4 @@ Route::get('dashboard/create-post', [PostController::class, 'indexPost'])->name(
 Route::post('dashboard/create-post', [PostController::class, 'storePost'])->name('create.new.post');
 Route::get('dashboard/create-category', [PostController::class, 'indexCategory'])->name('page.new.category');
 Route::post('dashboard/create-category', [PostController::class, 'storeCategory'])->name('create.new.category');
+Route::get('articles', [PostController::class, 'index'])->name('article.all');

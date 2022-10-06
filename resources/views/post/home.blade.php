@@ -1,59 +1,133 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="sm:container sm:mx-auto sm:mt-10">
-        <div class="w-full sm:px-6">
-            <div class=" grid grid-cols-3 ">
-                <div class=" bg-gray-200 w-72">
-                    <div class="bg-white rounded-sm w-full mb-4 p-2 flex">
-                        <img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/06/23/900003581.jpg"
-                            alt="" class="object-cover w-20 h-20 rounded-full">
+    <div class="bg-blue-900">
 
-                        <div class="ml-5 flex items-center">
-                            <p class="font-medium ">{{ Auth::user()->name }}</p>
-                            {{-- <p>{{ Auth::user()->email }}</p> --}}
-                        </div>
-                    </div>
-                    <x-side-bar />
-                </div>
+        <div class="w-full bg-white h-96 grid grid-cols-2">
+            <div class="mt-24 ml-10">
+                <p class="font-bold text-5xl  text-blue-900">Tingkatkan Wawasan
+                    Kamu</p>
+                <p class=" text-teal-700 text-xl  mt-2 font-normal">Di sini Kamu bisa meningkatkan wawansanmu dengan
+                    membaca artikel
+                </p>
+                <p class="text-teal-700 text-xl  mt-2 font-normal">Selain itu kamu juga bisa menulis arikel kamu sendiri</p>
+            </div>
+            <div class="flex items-center justify-center">
 
-                <div class="col-span-2 h-full bg-white rounded-sm p-5 flex flex-wrap items-center justify-center">
-                    @foreach ($articles as $item)
-                        <div class="max-w-2xl mr-4 mt-5 ">
-                            <div
-                                class="bg-white shadow-md border border-gray-200 rounded-lg max-w-xs dark:bg-gray-800 dark:border-gray-700">
-                                <a href="#">
-                                    <img class=" object-cover h-48 w-96 rounded-t-lg"
-                                        src="{{ asset('/storage/' . $item->image) }}" alt="">
-                                </a>
-                                <div class="p-5">
-                                    <a href="#">
-                                        <h5
-                                            class="text-gray-900 font-bold text-sm truncate tracking-tight mb-2 dark:text-white">
-                                            {{ $item->title }}</h5>
-                                    </a>
-                                    <p class="font-normal text-gray-700 truncate mb-3 dark:text-gray-400">
-                                        {{ $item->content }}</p>
-                                    <a href="{{ route('detail.article', ['article' => $item->id]) }}"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Read more
-                                        <svg class="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
-
-
-                </div>
-
+                <img src="{{ asset('image/background2.svg') }}" class="h-80">
             </div>
         </div>
-    </main>
+        <div class="grid grid-cols-2 px-32 mt-10">
+
+            <div>
+                <p class=" text-white font-semibold text-2xl">Baru-baru ini ditambahkan</p>
+                <p class=" mt-3 text-white font-normal text-sm">Ini adalah daftar Artikel yang baru saja ditambahkan di
+                    website
+                    ini.
+                </p>
+
+            </div>
+            <div class="flex items-end justify-end">
+
+                <input
+                    class="block w-96 px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
+                    border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white  focus:outline-none"
+                    id="title" name="title" type="text" placeholder="Search By title ">
+            </div>
+        </div>
+        <div class=" mt-10 flex flex-wrap justify-center items-center">
+
+            <a href="">
+                <div class="w-72 pb-4 mx-5 bg-white rounded-xl">
+                    <img src="https://awsimages.detik.net.id/community/media/visual/2020/07/21/10-jenis-warna-baru-2_169.jpeg?w=750&q=90"
+                        class=" bg-fixed w-full h-36 rounded-xl " alt="">
+                    <p class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
+                        Category
+                    </p>
+                    <p class=" ml-3 mt-2 underline-offset-4 font-semibold text-base text-justify truncate text-gray-800 ">
+                        rancang bangun sistem
+                        informasi
+                        sdmadsadasds</p>
+                    <p class="ml-3 mt-2 font-thin text-base text-justify truncate text-gray-800 ">10 minutes ago
+                    </p>
+
+                </div>
+            </a>
+            <div class="w-72 mx-5 pb-4  bg-white rounded-xl">
+                <img src="https://awsimages.detik.net.id/community/media/visual/2020/07/21/10-jenis-warna-baru-2_169.jpeg?w=750&q=90"
+                    class=" bg-fixed w-full h-36 rounded-xl " alt="">
+                <p class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
+                    Category
+                </p>
+                <p class="  ml-3 mt-2 font-semibold text-base text-justify truncate text-gray-800 ">rancang bangun sistem
+                    informasi
+                    sdmadsadasds</p>
+                <p class=" mb-2  ml-3 mt-2 font-thin text-base text-justify truncate text-gray-800 ">Dibuat 8 menit yang
+                    laliu
+                </p>
+                <p class=" font-normal text-base text-justify truncate text-gray-800 ">
+                </p>
+            </div>
+            <div class="w-72 mx-5 pb-4 bg-white rounded-xl">
+                <img src="https://awsimages.detik.net.id/community/media/visual/2020/07/21/10-jenis-warna-baru-2_169.jpeg?w=750&q=90"
+                    class=" bg-fixed w-full h-36 rounded-xl " alt="">
+                <p class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
+                    Category
+                </p>
+                <p class="  ml-3 mt-2 font-semibold text-base text-justify truncate text-gray-800 ">rancang bangun sistem
+                    informasi
+                    sdmadsadasds</p>
+                <p class=" mb-2  ml-3 mt-2 font-thin text-base text-justify truncate text-gray-800 ">Dibuat 8 menit yang
+                    laliu
+                </p>
+                <p class=" font-normal text-base text-justify truncate text-gray-800 ">
+                </p>
+            </div>
+            <div class="w-72 mx-5 pb-4 bg-white rounded-xl">
+                <img src="https://awsimages.detik.net.id/community/media/visual/2020/07/21/10-jenis-warna-baru-2_169.jpeg?w=750&q=90"
+                    class=" bg-fixed w-full h-36 rounded-xl " alt="">
+                <p class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
+                    Category
+                </p>
+                <p class="  ml-3 mt-2 font-semibold text-base text-justify truncate text-gray-800 ">rancang bangun sistem
+                    informasi
+                    sdmadsadasds</p>
+                <p class=" mb-2  ml-3 mt-2 font-thin text-base text-justify truncate text-gray-800 ">Dibuat 8 menit yang
+                    laliu
+                </p>
+                <p class=" font-normal text-base text-justify truncate text-gray-800 ">
+                </p>
+            </div>
+            <div class="w-72 mx-5 pb-4 mt-4 bg-white rounded-xl">
+                <img src="https://awsimages.detik.net.id/community/media/visual/2020/07/21/10-jenis-warna-baru-2_169.jpeg?w=750&q=90"
+                    class=" bg-fixed w-full h-36 rounded-xl " alt="">
+                <p class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
+                    Category
+                </p>
+                <p class="  ml-3 mt-2 font-semibold text-base text-justify truncate text-gray-800 ">rancang bangun sistem
+                    informasi
+                    sdmadsadasds</p>
+                <p class=" mb-2  ml-3 mt-2 font-thin text-base text-justify truncate text-gray-800 ">Dibuat 8 menit yang
+                    laliu
+                </p>
+                <p class=" font-normal text-base text-justify truncate text-gray-800 ">
+                </p>
+            </div>
+        </div>
+        <div class="px-20 mt-10">
+            <div class="w-72 mx-5 bg-white rounded-xl">
+                <img src="https://awsimages.detik.net.id/community/media/visual/2020/07/21/10-jenis-warna-baru-2_169.jpeg?w=750&q=90"
+                    class=" bg-fixed w-full h-36 rounded-xl " alt="">
+                <p class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
+                    Category
+                </p>
+                <p class="  ml-3 mt-2 font-semibold text-base text-justify truncate text-gray-800 ">rancang bangun sistem
+                    informasi
+                    sdmadsadasds</p>
+                <p class="  ml-3 mt-2 font-thin text-base text-justify truncate text-gray-800 ">Dibuat 8 menit yang laliu
+                </p>
+            </div>
+        </div>
+
+    </div>
 @endsection
