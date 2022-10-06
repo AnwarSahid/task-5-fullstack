@@ -24,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $articles = Articles::where('user_id', auth()->user()->id)->limit(30)->latest()->get();
+        // $articles = Articles::where('user_id', auth()->user()->id)->limit(30)->latest()->get();
+        $articles = Articles::paginate(12);
         return view('post.home', compact('articles'));
     }
 

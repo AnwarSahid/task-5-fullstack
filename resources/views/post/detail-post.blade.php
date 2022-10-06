@@ -1,8 +1,4 @@
 @extends('layouts.app')
-
-@section('content')
-    @extends('layouts.app')
-
 @section('content')
     <!-- component -->
     <section class="bg-white dark:bg-gray-900">
@@ -42,4 +38,5 @@
             </div>
         </div>
     </section>
+    <x-footer />
 @endsection

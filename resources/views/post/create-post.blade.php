@@ -5,7 +5,7 @@
         <div class="w-full sm:px-6">
             <div class=" grid grid-cols-6 ">
                 <div class="w-auto ">
-                    <div class="bg-white rounded-lg shadow-xs">
+                    <div class="bg-white rounded-lg shadow-xl">
 
                         <div class=" rounded-lg w-full mb-4 flex justify-center items-center">
                             <img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/06/23/900003581.jpg"
@@ -21,7 +21,7 @@
 
                 </div>
                 <div class="col-span-2 mx-2  ">
-                    <div class="bg-white rounded-lg p-5">
+                    <div class="bg-white shadow-xl rounded-lg p-5">
                         <p class="mb-5 font-semibold font-sans text-xl text-gray-800">
                             Create New Category</p>
 
@@ -71,7 +71,7 @@
                     </div>
 
                 </div>
-                <div class="col-span-3 h-full bg-white rounded-lg p-5  ">
+                <div class="col-span-3 h-full bg-white rounded-lg p-5 shadow-xl  ">
                     <form action="{{ route('create.new.post') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="mb-4 ">
@@ -87,7 +87,7 @@
                             @enderror
                         </div>
                         <div class=" mt-5">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
                                 Category
                             </label>
                             <select
@@ -199,4 +199,6 @@
             }
         });
     </script>
+
+    <x-footer />
 @endsection
