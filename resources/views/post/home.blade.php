@@ -2,6 +2,4 @@
 
 @section('content')
     <livewire:home />
-
-
 @endsection

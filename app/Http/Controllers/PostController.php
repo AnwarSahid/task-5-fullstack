@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function indexPost()
     {
-        $categories = Categories::where('user_id', auth()->user()->id)->limit(50)->latest()->get();
+        $categories = Categories::where('user_id', auth()->user()->id)->limit(15)->latest()->get();
         return view('post.create-post', compact('categories'));
     }
     public function index()
@@ -26,7 +26,7 @@ class PostController extends Controller
 
     public function indexCategory()
     {
-        $categories = Categories::where('user_id', auth()->user()->id)->limit(50)->latest()->get();
+        $categories = Categories::where('user_id', auth()->user()->id)->limit(10)->latest()->get();
         return view('post.create-category', compact('categories'));
     }
 

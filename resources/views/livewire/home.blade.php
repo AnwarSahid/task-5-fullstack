@@ -1,5 +1,5 @@
-<div class="h-screen bg-blue-900">
-    <div class="bg-blue-900 ">
+<div class="h-screen ">
+    <div class="bg-blue-900 pb-20">
 
         <div class="w-full bg-white h-96 grid grid-cols-2">
             <div class=" mt-24 ml-32">
@@ -41,7 +41,6 @@
             </div>
         </div>
         <div class=" mt-10 flex flex-wrap px-28">
-
             @foreach ($articles as $article)
                 <a href="{{ route('detail.article', ['article' => $article->id]) }}">
                     <div class="w-72 pb-4 mt-5  mx-4 bg-white rounded-xl">
@@ -67,6 +66,6 @@
             {{ $articles->links() }}
         </div>
     </div>
-
     <x-footer />
+
 </div>

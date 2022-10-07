@@ -19,4 +19,14 @@ class Articles extends Model
         'title',
         'content',
     ];
+
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function categorys()
+    {
+        return $this->belongsTo(Categories::class, 'category_id', 'id');
+    }
 }
