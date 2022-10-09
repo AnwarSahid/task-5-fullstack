@@ -28,26 +28,23 @@
         <header class="bg-white py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
                 <div class="flex  items-end">
-                    {{-- <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-900 no-underline">
-                        {{ config('app.name', 'Laravel') }}
-                    </a> --}}
+
                     <a href="{{ url('/') }}" class=" ">
                         <img src="{{ asset('image/inv_logo.webp') }}" class="w-32 ">
                     </a>
-                    <a href="{{ route('home') }}" class="ml-10 text-sm font-normal text-white ">
-                        <span class="px-4 py-2 rounded-full bg-investree">Article</span>
-                    </a>
-                    <a href="{{ route('create.new.post') }}" class="text-sm ml-4 font-normal text-white ">
-                        <span class="px-4 py-2 rounded-full bg-investree">Create Posting</span>
-                    </a>
+@if (Auth::check())
+<a href="{{ route('create.new.post') }}" class="text-sm ml-10 font-normal text-white ">
+    <span class="px-4 py-2 rounded-full bg-investree">Create Posting</span>
+</a>
+@endif
                 </div>
 
                 <div></div>
                 <nav class="space-x-4 text-gray-900 text-sm sm:text-base">
                     @guest
-                        <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="no-underline  px-4 py-2 rounded-full bg-investree text-sm ml-4 font-normal text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                         @if (Route::has('register'))
-                            <a class="no-underline hover:underline"
+                            <a class="no-underline  px-4 py-2 rounded-full bg-investree text-sm ml-4 font-normal text-white"
                                 href="{{ route('register') }}">{{ __('Register') }}</a> @endif
 @else
 <div class="group

@@ -24,12 +24,16 @@ class PostController extends Controller
         return view('post.articles', compact('articles'));
     }
 
-    public function indexCategory()
+    public function indexUserPost()
     {
-        $categories = Categories::where('user_id', auth()->user()->id)->limit(10)->latest()->get();
-        return view('post.create-category', compact('categories'));
+        // $categories = Articles::where('user_id', auth()->user()->id)->limit(10)->latest()->get();
+        return view('post.all-user-post');
     }
 
+    public function detailArticle(Articles $article)
+    {
+        return view('post.detail-post', compact('article'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -92,9 +96,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Articles $article)
     {
-        //
+
+        $categories = Categories::where('user_id', auth()->user()->id)->limit(15)->latest()->get();
+        return view('post.edit-post', compact('article', 'categories'));
     }
 
     /**
@@ -104,9 +110,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Articles $article)
     {
-        //
+
+        $attr = $this->validate($request, [
+            'title' => 'required|max:255',
+            'image' => 'required|mimes:jpg,png,jfif|max:2048',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
+
+
+        $attr['user_id'] = auth()->user()->id;
+        $attr['image'] = $request->file('image')->store('image', 'public');
+
+        $article->update($attr);
+
+        return back()->with('message', 'posting was created');
     }
 
     /**

@@ -22,6 +22,7 @@
 
                         <div class="p-2 mt-3">
                             <form action="{{ route('create.new.category') }}" method="POST">
+
                                 @csrf
                                 <div class="mb-4">
 
@@ -29,7 +30,7 @@
                                         <input
                                             class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
                                             border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                            id="name" name="name" type="text" placeholder="Category">
+                                            id="name" name="name" type="text" placeholder="Create Caterory">
                                         <button
                                             class="ml-2 border-2  p-2 text-gray-500  hover:text-white hover:bg-blue-500 rounded-lg flex items-center justify-center focus:outline-none">
                                             <svg class="h-6 w-6  hover:text-white" viewBox="0 0 24 24" stroke-width="2"
@@ -68,7 +69,9 @@
 
                 </div>
                 <div class="col-span-8 ml-10 h-full bg-white rounded-lg p-5 shadow-xl  ">
-                    <form action="{{ route('create.new.post') }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('update.post', ['article' => $article->id]) }}" enctype="multipart/form-data"
+                        method="POST">
+                        @method('PUT')
                         @csrf
                         <div class="mb-4 ">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
@@ -77,7 +80,8 @@
                             <input
                                 class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
                                 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="title" name="title" type="text" placeholder="title">
+                                id="title" name="title" type="text" placeholder="title"
+                                value="{{ $article->title }}">
                             @error('title')
                                 <span class="text-red-500 font-normal text-sm">{{ $message }}</span>
                             @enderror
@@ -90,7 +94,7 @@
                                 class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
                         border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 aria-label=".form-select-lg example" name="category_id">
-
+                                <option value="{{ $article->id }}">{{ $article->categorys->name }}</option>
                                 @foreach ($categories as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
@@ -107,7 +111,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 Content
                             </label>
-                            <textarea class="tinymce-editor" name="content"></textarea>
+                            <textarea class="tinymce-editor" name="content"> {{ $article->content }}</textarea>
 
                             @error('content')
                                 <span class="text-red-500 font-normal text-sm">{{ $message }}</span>

@@ -6,10 +6,9 @@ use App\Models\Articles;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Home extends Component
+class Userpost extends Component
 {
     use WithPagination;
-
     public $search;
     public function render()
     {
@@ -21,7 +20,7 @@ class Home extends Component
                 $q->where('title',  'like', '%' . strtolower($this->search) . '%');
             });
         }
-        $articles = $query->orderBy('created_at', 'desc')->paginate(12);
-        return view('livewire.home', compact('articles'));
+        $articles = $query->orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->paginate(6);
+        return view('livewire.userpost', compact('articles'));
     }
 }
