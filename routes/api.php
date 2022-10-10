@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ArticleApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/articles', [ArticleApiController::class, 'index']);
+Route::get('/articles/{article}', [ArticleApiController::class, 'show']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/category/create', [ArticleApiController::class, 'storeCategory']);
 });
