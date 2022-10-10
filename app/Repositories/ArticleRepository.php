@@ -13,7 +13,7 @@ class ArticleRepository
 
         return response()->json([
             'message' => 'Ok',
-            'data' => Articles::all()
+            'data' => Articles::with('categorys')->paginate(5)
         ]);
     }
 
@@ -21,18 +21,24 @@ class ArticleRepository
     {
         return response()->json([
             'message' => 'Ok',
-            'data' => Articles::findOrFail($article)
+            'data' => Articles::with('categorys')->findOrFail($article)
         ]);
     }
 
     public function CreateArticle($article)
     {
-
-
-
         return response()->json([
             'message' => 'Ok',
             'data' => Articles::findOrFail($article)
+        ]);
+    }
+
+    public function deleteArticle($article)
+    {
+        $article->delete();
+
+        return response()->json([
+            'message' => 'Article Was Deleted'
         ]);
     }
 }

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class CategoryRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth('sanctum')->check();
+        return true;
     }
 
     /**
@@ -25,7 +24,9 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:30',
+            'name' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
         ];
     }
 }

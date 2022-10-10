@@ -8,16 +8,19 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Articles;
 use App\Models\Categories;
 use App\Repositories\ArticleRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class ArticleApiController extends Controller
 {
 
     private ArticleRepository  $articleRepository;
+    private CategoryRepository $categoryRepository;
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleRepository $articleRepository, CategoryRepository $categoryRepository)
     {
         $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function index()
@@ -25,12 +28,6 @@ class ArticleApiController extends Controller
         return $this->articleRepository->getAllArticle();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ArticleRequest $request)
     {
         $base64 = base64_decode($request->image);
@@ -41,52 +38,42 @@ class ArticleApiController extends Controller
             'category_id' => $request->category_id
         ]);
     }
-
-    public function storeCategory(CategoryRequest $request)
-    {
-
-        $article = Categories::create([
-            'name' => $request->name,
-            'name' => auth()->user()->id,
-        ]);
-
-        return response()->json([
-            'message' => 'Category Was Created',
-            'data' => $article
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Articles  $articles
-     * @return \Illuminate\Http\Response
-     */
     public function show($articles)
     {
         return $this->articleRepository->getArticleById($articles);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Articles  $articles
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Articles $articles)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Articles  $articles
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Articles $articles)
     {
-        //
+        return $this->articleRepository->deleteArticle($articles);
+    }
+
+
+
+
+
+    public function storeCategory(CategoryRequest $request)
+    {
+        return $this->categoryRepository->createCategory($request);
+    }
+
+
+    public function showCategory()
+    {
+        return $this->categoryRepository->getCategoryByUserId();
+    }
+
+    public function updateCategory(Request $request, Categories $category)
+    {
+        return $this->categoryRepository->updateCategory($request, $category);
+    }
+
+    public function destroyCategory(Categories $category)
+    {
+        return $this->categoryRepository->deleteCategory($category);
     }
 }

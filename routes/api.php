@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ArticleApiController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,13 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/articles', [ArticleApiController::class, 'index']);
 Route::get('/articles/{article}', [ArticleApiController::class, 'show']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/regiter', [AuthController::class, 'register']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::group(['middleware' => 'auth'], function () {
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+
+
+    Route::put('/articles/{articles}/edit', [ArticleApiController::class, 'update']);
+    Route::delete('/articles/{articles}/delete', [ArticleApiController::class, 'destroy']);
+    //route category
+    Route::get('/category', [ArticleApiController::class, 'showCategory']);
+    Route::put('/category/{category}/update', [ArticleApiController::class, 'updateCategory']);
     Route::post('/category/create', [ArticleApiController::class, 'storeCategory']);
+    Route::delete('/category/{category}/delete', [ArticleApiController::class, 'destroyCategory']);
 });
