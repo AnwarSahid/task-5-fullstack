@@ -32,7 +32,7 @@
                     <img src="{{ asset('/storage/' . $article->image) }}" class=" object-cover w-full h-36 rounded-xl">
                     <p
                         class=" ml-3 mt-2 underline decoration-solid decoration-sky-500 font-bold text-sm text-blue-600 ">
-                        {{ $article->categorys->name }}
+                        {{ $article->categorys->name ?? 'uncategorized' }}
                     </p>
                     <p
                         class=" ml-3 mt-2 underline-offset-4 font-semibold text-base text-justify truncate text-gray-800 ">

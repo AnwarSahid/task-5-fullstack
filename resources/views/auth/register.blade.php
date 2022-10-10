@@ -7,7 +7,7 @@
                 <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md  sm:shadow-lg">
 
                     <header
-                        class="font-semibold flex justify-center  bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
+                        class="font-semibold flex justify-center  bg-invesblue text-white py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
                         {{ __('Register') }}
                     </header>
 
@@ -76,9 +76,9 @@
                                 name="password_confirmation" required autocomplete="new-password">
                         </div>
 
-                        <div class="flex flex-wrap">
+                        <div class="flex justify-end flex-wrap">
                             <button type="submit"
-                                class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                                class="w-20 select-none font-semibold whitespace-no-wrap px-3 py-2 rounded-lg text-sm leading-normal no-underline text-gray-100 bg-invesblue hover:bg-blue-800 sm:py-4">
                                 {{ __('Register') }}
                             </button>
 
