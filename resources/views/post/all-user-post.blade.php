@@ -3,7 +3,7 @@
 @section('content')
     <nav class=" sm:mx-auto sm:mt-10 pb-20">
         <div class="w-full sm:px-6">
-            <div class=" grid grid-cols-12 ">
+            <div class=" md:grid md:grid-cols-12 ">
                 <div class="w-auto col-span-3 ">
                     <div class="shadow-xl rounded-lg pb-10 bg-white">
 
@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-9 ml-5 p-5 bg-white rounded-lg shadow-lg">
+                <div class="col-span-9 md:ml-5 p-5 bg-white rounded-lg shadow-lg">
                     <livewire:userpost />
                 </div>
 

@@ -33,8 +33,8 @@
                         <img src="{{ asset('image/inv_logo.webp') }}" class="w-32 ">
                     </a>
 @if (Auth::check())
-<a href="{{ route('create.new.post') }}" class="text-sm ml-10 font-normal text-white ">
-    <span class="px-4 py-2 rounded-full bg-investree">Create Posting</span>
+<a href="{{ route('create.new.post') }}" class="text-sm flex flex-wrap ml-10 font-normal text-white ">
+    <span class="px-4 py-2 rounded-full bg-investree">Post</span>
 </a>
 @endif
                 </div>
@@ -51,7 +51,7 @@
         w-auto inline-block items-end justify-end ">
     <div class="px-4
      py-2 text-white rounded-full bg-invesblue outline-none">
-        <div class="flex items-center">{{ Auth::user()->name }}
+        <div class="flex items-center">{{ substr(Auth::user()->name, 0, 6) }}
             <span class="ml-2 p-1 rounded-full bg-investree">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-3 h-3">

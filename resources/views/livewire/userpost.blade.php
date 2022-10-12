@@ -1,6 +1,6 @@
 <div>
 
-    <div class="grid grid-cols-2  mt-10">
+    <div class="md:grid md:grid-cols-2  mt-10">
 
         <div class=" text-invesblue">
             <p class="  font-semibold text-2xl">Yang Baru-Baru Ini Kamu Tambahkan</p>

@@ -52,10 +52,6 @@ class ArticleApiController extends Controller
         return $this->articleRepository->deleteArticle($articles);
     }
 
-
-
-
-
     public function storeCategory(CategoryRequest $request)
     {
         return $this->categoryRepository->createCategory($request);

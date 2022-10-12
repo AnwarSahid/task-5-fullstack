@@ -3,7 +3,7 @@
 @section('content')
     <nav class=" sm:mx-auto sm:mt-10 pb-20">
         <div class="w-full sm:px-6">
-            <div class=" grid grid-cols-12 ">
+            <div class=" md:grid md:grid-cols-12 ">
                 <div class="w-auto col-span-3 shadow-xl rounded-lg  bg-white">
                     <div class="">
                         <div class=" rounded-lg w-full mb-4 flex justify-center items-center">
@@ -67,7 +67,7 @@
                     </div>
 
                 </div>
-                <div class="col-span-8 ml-10 h-full bg-white rounded-lg p-5 shadow-xl  ">
+                <div class="col-span-8 md:ml-10 h-full bg-white rounded-lg p-5 shadow-xl  ">
                     <form action="{{ route('create.new.post') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="mb-4 ">
