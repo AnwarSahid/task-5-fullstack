@@ -20,23 +20,25 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('dashboard/create-post', [PostController::class, 'indexPost'])->name('page.new.post');
-Route::get('/detail/{article}/article', [PostController::class, 'detailArticle'])->name('detail.article');
-Route::post('dashboard/create-post', [PostController::class, 'storePost'])->name('create.new.post');
-Route::get('dashboard/user/post', [PostController::class, 'indexUserPost'])->name('all.user.post');
-Route::get('dashboard/user/{article}/edit', [PostController::class, 'edit'])->name('edit.post');
-Route::put('dashboard/user/{article}/edit', [PostController::class, 'update'])->name('update.post');
-Route::post('dashboard/create-category', [PostController::class, 'storeCategory'])->name('create.new.category');
-Route::get('articles', [PostController::class, 'index'])->name('article.all');
+// Auth::routes();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('dashboard/create-post', [PostController::class, 'indexPost'])->name('page.new.post');
+    Route::get('/detail/{article}/article', [PostController::class, 'detailArticle'])->name('detail.article');
+    Route::post('dashboard/create-post', [PostController::class, 'storePost'])->name('create.new.post');
+    Route::get('dashboard/user/post', [PostController::class, 'indexUserPost'])->name('all.user.post');
+    Route::get('dashboard/user/{article}/edit', [PostController::class, 'edit'])->name('edit.post');
+    Route::put('dashboard/user/{article}/edit', [PostController::class, 'update'])->name('update.post');
+    Route::post('dashboard/create-category', [PostController::class, 'storeCategory'])->name('create.new.category');
+    Route::get('articles', [PostController::class, 'index'])->name('article.all');
+});

@@ -72,4 +72,9 @@ class ArticleApiController extends Controller
     {
         return $this->categoryRepository->deleteCategory($category);
     }
+
+    public function allCategory()
+    {
+        return $this->categoryRepository->getallCategory();
+    }
 }

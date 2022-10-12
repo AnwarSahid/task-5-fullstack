@@ -23,6 +23,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/regiter', [AuthController::class, 'register']);
 
 
+Route::get('/category/all', [ArticleApiController::class, 'allCategory']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
