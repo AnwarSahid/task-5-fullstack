@@ -172,7 +172,7 @@
             selector: 'textarea.tinymce-editor',
             height: 300,
             menubar: false,
-            forced_root_block: false,
+            // forced_root_block: false,
             deprecation_warnings: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',

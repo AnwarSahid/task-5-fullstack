@@ -1,6 +1,6 @@
 <div class="card w-full">
     <aside class="" aria-label="Sidebar">
-        <div class="px-3 py-4 overflow-y-auto rounded  dark:bg-gray-800">
+        <div class="px-3 py-4 overflow-y-auto rounded  ">
             <ul class="space-y-2">
                 <li>
                     <a href="{{ route('all.user.post') }}"

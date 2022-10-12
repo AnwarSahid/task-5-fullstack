@@ -46,7 +46,7 @@
             </a>
         @endforeach
     </div>
-    <div class="mx-36 mt-4">
+    <div class="md:mx-36 mx-10 mt-4">
         {{ $articles->links() }}
     </div>
 </div>

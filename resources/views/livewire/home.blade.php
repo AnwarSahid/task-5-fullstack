@@ -42,7 +42,7 @@
                 Loading...
             </div>
         </div>
-        <div class=" md:mt-10  flex flex-wrap justify-center px-5 md:px-28">
+        <div class=" md:mt-10  flex flex-wrap  px-5 md:px-28">
             @foreach ($articles as $article)
                 <a href="{{ route('detail.article', ['article' => $article->id]) }}">
                     <div class=" w-96 md:w-72 pb-4 mt-5 mx-4 bg-white rounded-xl">
