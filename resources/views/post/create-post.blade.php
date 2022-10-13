@@ -49,16 +49,103 @@
                                     @enderror
                                 </div>
                             </form>
+                            @if (session()->has('succesCategory'))
+                                <div>
+
+                                    <div id="alert-3" class="flex p-4 mb-4 bg-green-100 rounded-lg dark:bg-green-200"
+                                        role="alert">
+                                        <svg aria-hidden="true"
+                                            class="flex-shrink-0 w-5 h-5 text-green-700 dark:text-green-800"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div class="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
+                                            {{ session()->get('succesCategory') }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @endif
+                            @if (session()->has('deleteCategory'))
+                                <div>
+
+                                    <div id="alert-3" class="flex p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200"
+                                        role="alert">
+                                        <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
+                                            {{ session()->get('deleteCategory') }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @endif
+
 
                             <div class=" flex flex-wrap">
 
                                 @foreach ($categories as $item)
-                                    <div class=" rounded-full px-3 py-1 text-sm font-hairline text-white m-3 bg-blue-700">
+                                    <button data-modal-toggle="popup-modal"
+                                        class=" rounded-full px-3 py-1 text-sm font-hairline focus:outline-none text-white m-3 bg-blue-700"
+                                        data-delete-link="{{ route('destroy.category', ['category' => $item->id]) }}">
                                         <span class="bg-white w-2 h-2 mr-2 inline-block rounded-full">
                                         </span>
                                         {{ $item->name }}
-                                    </div>
+                                    </button>
                                 @endforeach
+
+                                <div id="popup-modal" tabindex="-1"
+                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center"
+                                    aria-hidden="true">
+                                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button type="button"
+                                                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                                data-modal-toggle="popup-modal">
+                                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div class="p-6 text-center">
+                                                <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-red-600 "
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                <form id="delete-court-form" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+
+                                                    <h3 class="mb-5 text-lg font-normal text-gray-800 ">Apakah Kamu
+                                                        yakin
+                                                        untuk
+                                                        menghapus Categori?</h3>
+                                                    <button type="submit"
+                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                        Ya
+                                                    </button>
+                                                    <button data-modal-toggle="popup-modal" type="button"
+                                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                        Tidak</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
@@ -72,7 +159,7 @@
                         @csrf
                         <div class="mb-4 ">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                                Title
+                                Judul
                             </label>
                             <input
                                 class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -84,7 +171,7 @@
                         </div>
                         <div class=" mt-5">
                             <label class="block text-gray-700 text-sm font-bold mb-2">
-                                Category
+                                Kategori
                             </label>
                             <select
                                 class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -105,7 +192,7 @@
 
                         <div class="form-group">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                                Content
+                                Konten
                             </label>
                             <textarea class="tinymce-editor" name="content"></textarea>
 
@@ -126,12 +213,13 @@
                                                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                             </svg>
 
-                                            <h2 class="mt-4 text-xl font-medium  tracking-wide">Payment File
+                                            <h2 class="mt-4 text-xl font-medium  tracking-wide">Thumbnail
                                             </h2>
 
                                             <p class="fileName ">Click to upload Image Cover</p>
 
                                             <input id="image" type="file" name="image" class="hidden">
+
                                     </main>
 
 
@@ -196,6 +284,12 @@
 
                 $('.fileName').text(filename);
             }
+        });
+    </script>
+
+    <script>
+        $('.font-hairline').on('click', function() {
+            $('#delete-court-form').attr('action', $(this).data('delete-link'));
         });
     </script>
 

@@ -66,7 +66,7 @@ class PostController extends Controller
 
 
         Articles::create($attr);
-        return back()->with('message', 'posting was created');
+        return redirect()->route('all.user.post')->with('message', 'Artikel Berhasil Dibuat');
     }
     public function storeCategory(Request $request)
     {
@@ -76,7 +76,7 @@ class PostController extends Controller
         ]);
         $attr['user_id'] = auth()->user()->id;
         Categories::create($attr);
-        return back()->with('message', 'posting was created');
+        return back()->with('succesCategory', 'Kategori Berhasil Dibuat');
     }
 
     /**
@@ -126,7 +126,7 @@ class PostController extends Controller
 
         $article->update($attr);
 
-        return back()->with('message', 'posting was created');
+        return redirect()->route('all.user.post')->with('message', 'Artikel Berhasil Diubah');
     }
 
     /**
@@ -135,8 +135,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyArticle(Articles $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('all.user.post')->with('delete', 'Artikel berhasil dihapus');
+    }
+    public function destroyCategory(Categories $category)
+    {
+
+        $category->delete();
+        return back()->with('deleteCategory', 'Kategori Berhasil Dihapus');
     }
 }

@@ -41,4 +41,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('dashboard/user/{article}/edit', [PostController::class, 'update'])->name('update.post');
     Route::post('dashboard/create-category', [PostController::class, 'storeCategory'])->name('create.new.category');
     Route::get('articles', [PostController::class, 'index'])->name('article.all');
+    Route::delete('articles/{article}/delete', [PostController::class, 'destroyArticle'])->name('destroy.article');
+    Route::delete('category/{category}/delete', [PostController::class, 'destroyCategory'])->name('destroy.category');
 });

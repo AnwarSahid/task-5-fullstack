@@ -23,7 +23,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/regiter', [AuthController::class, 'register']);
 
 
-Route::get('/category/all', [ArticleApiController::class, 'allCategory']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
@@ -31,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::put('/articles/{articles}/edit', [ArticleApiController::class, 'update']);
     Route::delete('/articles/{articles}/delete', [ArticleApiController::class, 'destroy']);
+
     //route category
     Route::get('/category', [ArticleApiController::class, 'showCategory']);
     Route::put('/category/{category}/update', [ArticleApiController::class, 'updateCategory']);
