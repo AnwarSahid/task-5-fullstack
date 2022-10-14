@@ -20,8 +20,6 @@ class ArticleRepository
 
     public function getArticleById($article)
     {
-
-
         try {
             $data = Articles::with('categorys')->findOrFail($article);
             return ResponseFormatter::success('Collected data  Successfully', $data);
@@ -30,19 +28,41 @@ class ArticleRepository
         }
     }
 
-    public function CreateArticle($article)
+    public function CreateArticle($request)
     {
-        return response()->json([
-            'message' => 'Ok',
-            'data' => Articles::findOrFail($article)
-        ]);
+        try {
+            $attr = $request->validate([
+                'title' => 'required|max:255',
+                'image' => 'required|mimes:jpg,png,jfif|max:2048',
+                'content' => 'required',
+                'category_id' => 'required'
+            ]);
+
+            $attr['user_id'] = auth()->user()->id;
+            $attr['image'] = $request->file('image')->store('image', 'public');
+            $data = Articles::create($attr);
+            return ResponseFormatter::created('Create Article Successfully', $data);
+        } catch (Exception $th) {
+            return ResponseFormatter::error('Failed to get data', json_decode($th->getMessage()), 500);
+        }
     }
-    public function EditArticle($article)
+    public function EditArticle($request, $articles)
     {
-        return response()->json([
-            'message' => 'Ok',
-            'data' => Articles::findOrFail($article)
-        ]);
+        try {
+            $attr = $request->validate([
+                'title' => 'required|max:255',
+                'image' => 'required|mimes:jpg,png,jfif|max:2048',
+                'content' => 'required',
+                'category_id' => 'required'
+            ]);
+
+            $attr['user_id'] = auth()->user()->id;
+            $attr['image'] = $request->file('image')->store('image', 'public');
+            $data = $articles->update($attr);
+            return ResponseFormatter::created('Update Article Successfully', $data);
+        } catch (Exception $th) {
+            return ResponseFormatter::error('Failed to get data', json_decode($th->getMessage()), 500);
+        }
     }
 
     public function deleteArticle($article)

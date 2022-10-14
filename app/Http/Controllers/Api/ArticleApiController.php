@@ -28,23 +28,21 @@ class ArticleApiController extends Controller
         return $this->articleRepository->getAllArticle();
     }
 
-    public function store(ArticleRequest $request)
+    public function storeArticle(ArticleRequest $request)
     {
-        $base64 = base64_decode($request->image);
-        $article = Articles::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'image' =>  $base64,
-            'category_id' => $request->category_id
-        ]);
+
+        return $this->articleRepository->CreateArticle($request);
     }
+
     public function show($articles)
     {
         return $this->articleRepository->getArticleById($articles);
     }
-    public function update(Request $request, Articles $articles)
+
+    public function updateArticle(Request $request, Articles $articles)
     {
-        //
+        return $request;
+        return $this->articleRepository->EditArticle($request, $articles);
     }
 
     public function destroy(Articles $articles)
@@ -65,6 +63,7 @@ class ArticleApiController extends Controller
 
     public function updateCategory(Request $request, Categories $category)
     {
+        return $request;
         return $this->categoryRepository->updateCategory($request, $category);
     }
 

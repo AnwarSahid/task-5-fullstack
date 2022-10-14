@@ -34,22 +34,7 @@ class PostController extends Controller
     {
         return view('post.detail-post', compact('article'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function storePost(Request $request)
     {
 
@@ -59,7 +44,6 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'required'
         ]);
-
 
         $attr['user_id'] = auth()->user()->id;
         $attr['image'] = $request->file('image')->store('image', 'public');
@@ -79,23 +63,6 @@ class PostController extends Controller
         return back()->with('succesCategory', 'Kategori Berhasil Dibuat');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Articles $article)
     {
 
@@ -103,13 +70,7 @@ class PostController extends Controller
         return view('post.edit-post', compact('article', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Articles $article)
     {
 
