@@ -70,7 +70,7 @@ class ArticleRepository
 
         try {
             $data = $article->delete();
-            return ResponseFormatter::success('Collected data  Successfully', $data);
+            return ResponseFormatter::success('Delete data  Successfully', $data);
         } catch (Exception $th) {
             return ResponseFormatter::error('Failed to get data', json_decode($th->getMessage()), 500);
         }

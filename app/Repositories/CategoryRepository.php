@@ -59,7 +59,7 @@ class CategoryRepository
     {
         try {
             $data = $categorys->delete();
-            return ResponseFormatter::created('Update Category Successfully', $data);
+            return ResponseFormatter::created('Delete    Category Successfully', $data);
         } catch (Exception $th) {
             return ResponseFormatter::error('Failed to update', json_decode($th->getMessage()), 500);
         }

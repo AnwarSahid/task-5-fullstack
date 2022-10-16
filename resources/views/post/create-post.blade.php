@@ -7,8 +7,8 @@
                 <div class="w-auto col-span-3 shadow-xl rounded-lg  bg-white">
                     <div class="">
                         <div class=" rounded-lg w-full mb-4 flex justify-center items-center">
-                            <img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/06/23/900003581.jpg"
-                                alt="" class="object-cover mt-5 w-20 h-20 rounded-full">
+                            <img src="{{ asset('image/pp.png') }}" alt=""
+                                class="object-cover mt-5 w-20 h-20 rounded-full">
                         </div>
                         <div class="mx-5">
                             <p class="font-semibold text-xs md:text-xl text-center  text-blue-900">
